@@ -13,7 +13,7 @@ public class Visitor {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int id=0;
 	@Column
 	private String name=null;
 	@Column

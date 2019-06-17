@@ -13,7 +13,7 @@ public class User {
 	
 	@Id	
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int id=0;
 	
 	@Column
 	private String firstName;

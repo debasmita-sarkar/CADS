@@ -11,7 +11,7 @@ public class Flat {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int id=0;
 
 	@Column(name="flatnumber")
 	private String number;

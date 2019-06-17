@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class VisitorParkingSlot {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	int id ;
+	int id=0 ;
 	@Column
 	String slot = null;
 	@Column

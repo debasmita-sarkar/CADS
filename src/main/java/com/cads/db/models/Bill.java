@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class Bill {
 	
 	@Id
-	private int id;
+	private int id=0;
 	
 	@Column
 	private String amount;

@@ -14,7 +14,7 @@ public class Login {
 	@Column
 	private String lastLoginUser;
 	@Id
-	private int Id;
+	private int Id=0;
 	
 	public String getUserName() {
 		return userName;

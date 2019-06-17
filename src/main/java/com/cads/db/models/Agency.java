@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class Agency {
 	
 	@Id
-	private int id;
+	private int id=0;
 	@Column
 	private String name;
 	@Column
