@@ -6,6 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.cads.db.repository.FlatRepository;
 
 @Entity
 @Table(name="user")
@@ -34,7 +39,10 @@ public class User {
 	private String userGroup;
 	
 	@Column
-	private String flatId;
+	private int flatId;
+	
+	@Transient
+	private String flatNumber;
 	
 	@Column
 	private String password;
@@ -100,11 +108,11 @@ public class User {
 	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-	public String getFlatId() {
+	public int getFlatId() {
 		return flatId;
 	}
 
-	public void setFlatId(String flatId) {
+	public void setFlatId(int flatId) {
 		this.flatId = flatId;
 	}
 
@@ -132,6 +140,14 @@ public class User {
 		this.userGroup = userGroup;
 	}
 	
+	public String getFlatNumber() {
+		return this.flatNumber;
+	}
+
+	public void setFlatNumber(String flatNumber) {		
+		this.flatNumber = flatNumber;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email

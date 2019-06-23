@@ -30,6 +30,7 @@ private UserService userService;
 	}
 	
 	@RequestMapping(com.cads.utils.URLConstants.USERURI)
+	@CrossOrigin(origins = "*")
 	@ResponseBody
 	public List<User> getAllUsers() {
 		return userService.getAllUsers();

@@ -44,19 +44,20 @@ public class TicketService {
 	}
 	
 	public void createTicket(Ticket ticket) {
-		
+		System.out.println("In create ticket service"+ticket.toString());
 		//Store the ticket in cache
 		ticketMapStore.put(ticket.getId(),ticket);
+		System.out.println("In create ticket service : ticketMapStore"+ticketMapStore.size());
 		ticketRepo.save(ticket);
 		//Send sms
-		sendSMS(ticket);
+		//sendSMS(ticket);
 		//Add logic of sending mail
 	}
 	/**
 	 * @param ticket
 	 */
 	private void sendSMS(Ticket ticket) {
-		Workers worker = workerRepository.findById(ticket.getWorkerId());
+		Workers worker = workerRepository.findById(ticket.getOwnerid());
 		//User user = userRepo.findById(ticket.getUserId());
 		User user = null;
 		if(worker == null && user == null) {
@@ -75,8 +76,10 @@ public class TicketService {
 		ticketMapStore.remove(ticketId);
 	}
 	
-	public List<Ticket> getAllTickets() {		
-		return ticketMapStore.values().stream().collect(Collectors.toList());
+	public List<Ticket> getAllTickets() {
+		System.out.println("In getAllTickets service"+ticketMapStore);
+		return ticketRepo.findAll();
+		//return ticketMapStore.values().stream().collect(Collectors.toList());
 	}
 
 	public Ticket updateTicket(Ticket ticket) {

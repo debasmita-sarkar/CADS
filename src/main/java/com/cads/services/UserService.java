@@ -2,27 +2,27 @@ package com.cads.services;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cads.db.models.Flat;
 import com.cads.db.models.User;
+import com.cads.db.repository.FlatRepository;
 import com.cads.db.repository.UserRepository;
-import com.cads.utils.Utility;
 
 @Service
 public class UserService {
 	
 	@Autowired
 	UserRepository userRepo;
+	@Autowired
+	FlatRepository flatRepo;
 	Map<String, String> setOfValidUserCredentials = new HashMap<String,String>();
 	Map<Integer, User> mapUserIDToUser = new HashMap<Integer,User>();	
 
@@ -47,6 +47,12 @@ public class UserService {
 
 	public void createUser(User user) {		
 		System.out.println("inside service:"+ user);
+		if(user.getFlatId()!=0) {
+			Flat flat = flatRepo.findById(user.getFlatId());
+			if(flat !=null && flat.getNumber()!=null && !flat.getNumber().isEmpty()) {
+				user.setFlatNumber(flat.getNumber());
+			}
+		}
 		mapUserIDToUser.put(user.getId(), user);
 		setOfValidUserCredentials.put(user.getEmail(), user.getPassword());		
 		System.out.println("all done"+ mapUserIDToUser.get(user.getId()));

@@ -23,11 +23,11 @@ public class Ticket {
 	@Column
 	private WorkerTypes workerType=null;
 	@Column
-	private TicketState state=null;
+	private TicketState state=null;	
 	@Column
-	private int workerId ;	
+	private int submitterid ;
 	@Column
-	private int userId ;	
+	private int ownerid ;
 	@Column
 	private String note = null;	
 	@Column
@@ -68,17 +68,12 @@ public class Ticket {
 	public void setState(TicketState state) {
 		this.state = state;
 	}
-	public int getWorkerId() {
-		return workerId;
+	
+	public int getSubmitterid() {
+		return submitterid;
 	}
-	public void setWorkerId(int workerId) {
-		this.workerId = workerId;
-	}
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setSubmitterid(int submitterid) {
+		this.submitterid = submitterid;
 	}
 	public String getNote() {
 		return note;
@@ -103,6 +98,13 @@ public class Ticket {
 	}
 	public void setBlocked(boolean isBlocked) {
 		this.isBlocked = isBlocked;
+	}
+	
+	public int getOwnerid() {
+		return ownerid;
+	}
+	public void setOwnerid(int ownerid) {
+		this.ownerid = ownerid;
 	}
 	
 	

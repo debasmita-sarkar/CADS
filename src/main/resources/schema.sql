@@ -45,19 +45,19 @@ CREATE TABLE IF NOT EXISTS flat(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
   
  
-  create table if not exists ticket(
-   id int not null ,
+ CREATE TABLE IF NOT EXISTS ticket(
+   id int NOT NULL ,
    description text,
    ticketType enum('maintenance','casual_expense','salary_deposit','check_balance','House_Work') not null,
-   workerType enum('Plumber','Electrician','Cleaning','Carpenter') not null,
-   state enum('NEW','ASSIGNED','IN_PROGRESS','CLOSED') not null,
-   userid int,   
-   workerid int,
+   workerType enum('Plumber','Electrician','Cleaning','Carpenter'),
+   state enum('NEW','ASSIGNED','IN_PROGRESS','CLOSED') NOT NULL,
+   submitterid int,   
+   ownerid int,
    note text,	
    dueDate VARCHAR(50),
    isrecurring boolean,
    primary key(id),
-   foreign key (userid) references user(id) 
+   foreign key (submitterid) references user(id) 
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
   
    create table if not exists visitor(
