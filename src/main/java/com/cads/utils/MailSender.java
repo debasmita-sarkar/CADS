@@ -62,8 +62,8 @@ public class MailSender {
 
 	}
 	
-	public static void main(String args[]) {
-		sendMail("debasmita.das.sarkar@gmail.com","Wow!","you have got mail!!");
-	}
+//	public static void main(String args[]) {
+//		sendMail("debasmita.das.sarkar@gmail.com","Wow!","you have got mail!!");
+//	}
 
 }
