@@ -28,10 +28,13 @@ public class BuildingService {
 		return mapBuildingIdToBuilding.values().stream().collect(Collectors.toSet());
 	}
 
-	public void addBuilding(Building building) {		
+	public void addBuilding(Building building) {
+		System.out.println("building details:"+building.toString());
 		mapBuildingIdToBuilding.put(building.getId(), building);
+		System.out.println("before adding building details to db:");
 		//add to db
 		buildingRepo.save(building);
+		System.out.println("after adding building details to db:");
 		
 	}
 

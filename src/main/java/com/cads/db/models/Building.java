@@ -5,8 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="building")
 public class Building {
 	
 	@Id
@@ -98,5 +100,11 @@ public class Building {
 
 	public void setProvince(String province) {
 		this.province = province;
+	}
+
+	@Override
+	public String toString() {
+		return "Building [id=" + id + ", name=" + name + ", city=" + city + ", country=" + country + ", province="
+				+ province + ", pin=" + pin + ", address=" + address + ", floors=" + floors + "]";
 	}
 }

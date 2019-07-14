@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cads.db.models.User;
+import com.cads.db.repository.UserRepository;
 
 @Service("authenticationService")
 public class AuthenticationService {
@@ -17,14 +18,23 @@ public class AuthenticationService {
 	    AuthenticationUtil authenticationUtil;
 	    
 	    @Autowired
+		UserRepository userRepo;
+	    
+	    @Autowired
 	    public AuthenticationService(AuthenticationUtil authenticationUtil)
 	    {
 	       
 	        this.authenticationUtil = authenticationUtil;
 	    }
-	    public User authenticate(String userName, String userPassword) throws AuthenticationException {
+	    public User authenticate(String userName, String userPassword) throws AuthenticationException, InvalidKeySpecException {
 	    	User user = new User();
-	        User userEntity = getUserByName(userName); // User name must be unique in our system
+	        //User userEntity = getUserByName(userName); // User name must be unique in our system
+	    	User userEntity = new User();
+	    	userEntity.setEmail("debasmita@gmail.com");
+	    	userEntity.setFlatId(6);
+	    	userEntity.setPassword(authenticationUtil.
+                    generateSecurePassword("debasmita", userEntity.getSalt()));
+	    	
 	        // as it is the emailid.Here we perform authentication business logic
 	        // If authentication fails, we throw new AuthenticationException
 	        // other wise we return UserProfile Details
@@ -47,9 +57,8 @@ public class AuthenticationService {
 	        BeanUtils.copyProperties(userEntity, user);
 	        return user;
 	    }
-	    private User getUserByName(String userName) {
-			// TODO Auto-generated method stub
-			return null;
+	    private User getUserByName(String userName) {			
+			return userRepo.findByEmail(userName);
 		}
 		public User resetSecurityCridentials(String password, 
 	            User user) {

@@ -7,13 +7,13 @@ import javax.persistence.Id;
 //@Entity
 public class Bill {
 	
-	@Id
+	//@Id
 	private int id=0;
 	
-	@Column
+	//@Column
 	private String amount;
 	
-	@Column
+	//@Column
 	private String ticketId;	
 	
 	//@Column

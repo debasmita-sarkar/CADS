@@ -20,10 +20,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id=0;
 	
-	@Column
+	@Column(name="firstname")
 	private String firstName;
 	
-	@Column
+	@Column(name="lastname")
 	private String lastName;	
 	
 	@Column
@@ -32,25 +32,35 @@ public class User {
 	@Column
 	private String phone;
 	
-	@Column
+	@Column(name="dateofbirth")
 	private String dateOfBirth;
 	
-	@Column
+	@Column(name="usergroup")
 	private String userGroup;
 	
-	@Column
+	@Column(name="flatid")
 	private int flatId;
 	
+	@Column
+	private int buildingid;	
+
+	public int getBuildingid() {
+		return buildingid;
+	}
+	public void setBuildingid(int buildingid) {
+		this.buildingid = buildingid;
+	}
+
 	@Transient
 	private String flatNumber;
 	
 	@Column
-	private String password;
+	private String password;	
 	
-	@Column
+	@Transient
 	private String salt;
 	
-	@Column
+	@Transient
 	private String token;
 
 	public String getToken() {
@@ -125,6 +135,9 @@ public class User {
 	}
 
 	public String getSalt() {
+		if(salt == null) {
+			return email;
+		}
 		return salt;
 	}
 
@@ -147,6 +160,8 @@ public class User {
 	public void setFlatNumber(String flatNumber) {		
 		this.flatNumber = flatNumber;
 	}
+	
+	
 
 	@Override
 	public String toString() {

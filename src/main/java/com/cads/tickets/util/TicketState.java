@@ -1,6 +1,11 @@
 package com.cads.tickets.util;
 
 public enum TicketState {
-	NEW,ASSIGNED, IN_PROGRESS,CLOSED;
+	NONE,
+	NEW,
+	ASSIGNED,
+	SUBMITTED,
+	IN_PROGRESS,
+	CLOSED;
 
 }

@@ -6,5 +6,4 @@ public enum TicketType {
 	salary_deposit,
 	check_balance,
 	House_Work;
-
 }

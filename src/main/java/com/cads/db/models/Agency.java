@@ -7,11 +7,11 @@ import javax.persistence.Id;
 //@Entity
 public class Agency {
 	
-	@Id
+	//@Id
 	private int id=0;
-	@Column
+	//@Column
 	private String name;
-	@Column
+	//@Column
 	private String phone;
 	public int getId() {
 		return id;

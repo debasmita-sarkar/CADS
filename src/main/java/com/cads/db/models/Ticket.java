@@ -1,42 +1,61 @@
 package com.cads.db.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.cads.tickets.util.TicketState;
 import com.cads.utils.TicketType;
 import com.cads.workers.WorkerTypes;
 
 @Entity
+@Table(name="ticket")
 public class Ticket {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id=0;
+	
 	@Column
 	private String description=null;
-	@Column
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="tickettype")
 	private TicketType ticketType=null;
-	@Column
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="workertype")
 	private WorkerTypes workerType=null;
-	@Column
+	
+	@Enumerated(EnumType.STRING)
 	private TicketState state=null;	
 	@Column
 	private int submitterid ;
 	@Column
 	private int ownerid ;
+	
 	@Column
 	private String note = null;	
-	@Column
-	private String dueDate=null;	
-	@Column
+	
+	@Column(name="duedate")
+	private String dueDate=null;
+	
+	@Column(name="isrecurring")
 	boolean isRecurring=  false;
-	@Column //decide if it is required as a column
+	@Transient //decide if it is required as a column
 	boolean isBlocked=false;
 	
+	@Transient
+	public List<TicketLog> logList = new ArrayList<TicketLog>();
 	
 	public int getId() {
 		return id;
@@ -93,6 +112,12 @@ public class Ticket {
 	public void setRecurring(boolean isRecurring) {
 		this.isRecurring = isRecurring;
 	}
+	@Override
+	public String toString() {
+		return "Ticket [id=" + id + ", description=" + description + ", ticketType=" + ticketType + ", workerType="
+				+ workerType + ", state=" + state + ", submitterid=" + submitterid + ", ownerid=" + ownerid + ", note="
+				+ note + ", dueDate=" + dueDate + ", isRecurring=" + isRecurring + ", isBlocked=" + isBlocked + "]";
+	}
 	public boolean isBlocked() {
 		return isBlocked;
 	}
@@ -107,5 +132,19 @@ public class Ticket {
 		this.ownerid = ownerid;
 	}
 	
+	
+	public void addLog(TicketLog log) {
+		logList.add(log);
+	}
+	
+	public List<TicketLog> getAllLogs(){
+		return logList;
+	}
+	
+	//pass 1 to get the latest, 2 to get the last but one, so on
+	public TicketLog getLogByPosition(int position) {
+		int previousPosition = logList.size()-position;
+		return logList.get(previousPosition);
+	}
 	
 }

@@ -89,10 +89,7 @@ public class TicketController {
 	@RequestMapping(com.cads.utils.URLConstants.TICKETTYPES)
 	@CrossOrigin(origins = "*")
 	@ResponseBody
-	public String [] getAllTicketTypes() {
-		return  Arrays.toString(TicketType.values()).replaceAll("^.|.$", "").split(", ");		
+	public String [] getAllTicketTypes() {		
+		return  Arrays.toString(TicketType.values()).replaceAll(", House_Work", "").replaceAll("^.|.$", "").split(", ");		
 	}
-	
-	
-
 }
