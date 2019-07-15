@@ -5,9 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public interface SignupRepository extends JpaRepository<Signup, Integer> {
-    public Signup findBySignupId();
-    public List<Signup> findByEmail();
+    public Signup findBySignupId(UUID signupId);
+    public List<Signup> findByEmail(String email);
 }

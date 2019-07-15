@@ -120,6 +120,7 @@ CREATE TABLE IF NOT EXISTS flat(
     buildingaddress text,
     singupid varchar(255) not null,
     signuptm datetime not null,
+    signupstate int not null
     UNIQUE(singupid)
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
   

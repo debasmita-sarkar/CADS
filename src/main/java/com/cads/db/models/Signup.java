@@ -5,7 +5,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.annotation.Generated;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.UUID;
 
 @Entity
@@ -16,37 +18,65 @@ public class Signup {
     private int id = 0;
 
     @Column
+    @NotNull
     private String firstName;
 
     @Column
+    @NotNull
     private String lastName;
 
     @Column
+    @NotNull
     private String email;
 
     @Column
+    @NotNull
     private String buildingName;
 
     @Column
+    @NotNull
     private String buildingCity;
 
     @Column
+    @NotNull
     private String buildingCountry;
 
     @Column
+    @NotNull
     private String buildingPin;
 
     @Column
+    @NotNull
     private String buildingAddress;
 
-    @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "signupid", columnDefinition = "VARCHAR(255)")
     private UUID signupId;
 
     @Column
     private Timestamp signupTm;
+
+    /* Signup state indicates which state
+       the sign up process is currently in.
+       This values may change in the future.
+       TODO: Use enums?
+       1 -> Registration done, email sent.
+       2 -> Email verification done, password not set.
+       3 -> Password set. After this the user can directly go to
+            home. So when signupState == 3, sign up GET should redirect
+            to Login.
+     */
+    @Column
+    private int signupState;
+
+    public int getSignupState() {
+        return signupState;
+    }
+
+    public void setSignupState(int signupState) {
+        if ((signupState < 1) || (signupState > 3))
+            throw new IllegalArgumentException("The value must be between 1, 2 and 3");
+        this.signupState = signupState;
+    }
 
     public int getId() {
         return id;
@@ -120,13 +150,13 @@ public class Signup {
         this.buildingAddress = buildingAddress;
     }
 
-//    public UUID getSignupId() {
-//        return signupId;
-//    }
-//
-//    public void setSignupId(UUID signupId) {
-//        this.signupId = signupId;
-//    }
+    public UUID getSignupId() {
+        return signupId;
+    }
+
+    public void setSignupId(UUID signupId) {
+        this.signupId = signupId;
+    }
 
     public Timestamp getSignupTm() {
         return signupTm;
@@ -150,6 +180,35 @@ public class Signup {
                 ", buildingAddress='" + buildingAddress + '\'' +
                 ", signupId='" + signupId + '\'' +
                 ", signupTm=" + signupTm +
+                ", signupState=" + signupState +
                 '}';
+    }
+
+    public Signup()
+    {
+
+    }
+
+    public Signup(Signup other) {
+        this.id = other.id;
+        this.firstName = other.firstName;
+        this.lastName = other.lastName;
+        this.email = other.email;
+        this.buildingName = other.buildingName;
+        this.buildingCity = other.buildingCity;
+        this.buildingCountry = other.buildingCountry;
+        this.buildingPin = other.buildingPin;
+        this.buildingAddress = other.buildingAddress;
+        this.signupId = other.signupId;
+        this.signupTm = other.signupTm;
+        this.signupState = other.signupState;
+    }
+
+    public void regenerateSignupId() {
+        UUID signupId = UUID.randomUUID();
+        Timestamp now = new Timestamp(Calendar.getInstance().getTime().getTime());
+        this.setSignupId(signupId);
+        this.setSignupTm(now);
+        this.setSignupState(1);
     }
 }
