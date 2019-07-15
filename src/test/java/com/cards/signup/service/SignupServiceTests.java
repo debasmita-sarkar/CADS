@@ -1,4 +1,4 @@
-package com.cads.users.service;
+package com.cards.signup.service;
 
 
 import com.cads.db.models.Signup;
