@@ -108,6 +108,19 @@ CREATE TABLE IF NOT EXISTS flat(
  
  
   
- 
+ create table if not exists signup(
+    id int not null,
+    firstname VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50),
+    email VARCHAR(50) NOT NULL,
+    buildingname VARCHAR(100),
+    buildingcity VARCHAR(50),
+    buildingcountry VARCHAR(50),
+    buildingpin VARCHAR(10),
+    buildingaddress text,
+    singupid varchar(255) not null,
+    signuptm datetime not null,
+    UNIQUE(singupid)
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
   
  
