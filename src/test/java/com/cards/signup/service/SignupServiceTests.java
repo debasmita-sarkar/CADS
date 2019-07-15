@@ -14,7 +14,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -68,7 +67,7 @@ public class SignupServiceTests {
         when(signupRepository.save(any(Signup.class))).thenReturn(new Signup());
         Signup saved = signupService.newSignup(signupData);
         saved.setSignupTm(before);
-        when(signupRepository.findBySignupId(any(UUID.class))).thenReturn(saved);
+        when(signupRepository.findBySignupId(any(String.class))).thenReturn(saved);
         Signup signup = signupService.fetchValidSignup(saved.getSignupId());
         Assert.assertNotNull(signup);
     }
@@ -83,7 +82,7 @@ public class SignupServiceTests {
         when(signupRepository.save(any(Signup.class))).thenReturn(new Signup());
         Signup saved = signupService.newSignup(signupData);
         saved.setSignupTm(before);
-        when(signupRepository.findBySignupId(any(UUID.class))).thenReturn(saved);
+        when(signupRepository.findBySignupId(any(String.class))).thenReturn(saved);
         Signup signup = signupService.fetchValidSignup(saved.getSignupId());
         Assert.assertNull(signup);
     }

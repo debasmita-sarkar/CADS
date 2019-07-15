@@ -49,8 +49,8 @@ public class Signup {
     @NotNull
     private String buildingAddress;
 
-    @Column(name = "signupid", columnDefinition = "VARCHAR(255)")
-    private UUID signupId;
+    @Column
+    private String signupId;
 
     @Column
     private Timestamp signupTm;
@@ -150,11 +150,11 @@ public class Signup {
         this.buildingAddress = buildingAddress;
     }
 
-    public UUID getSignupId() {
+    public String getSignupId() {
         return signupId;
     }
 
-    public void setSignupId(UUID signupId) {
+    public void setSignupId(String signupId) {
         this.signupId = signupId;
     }
 
@@ -207,7 +207,7 @@ public class Signup {
     public void regenerateSignupId() {
         UUID signupId = UUID.randomUUID();
         Timestamp now = new Timestamp(Calendar.getInstance().getTime().getTime());
-        this.setSignupId(signupId);
+        this.setSignupId(signupId.toString());
         this.setSignupTm(now);
         this.setSignupState(1);
     }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.UUID;
 
 @Service
 public class SignupService {
@@ -27,7 +26,7 @@ public class SignupService {
         return model;
     }
 
-    public Signup fetchValidSignup(UUID signupId) {
+    public Signup fetchValidSignup(String signupId) {
         Signup signup = signupRepository.findBySignupId(signupId);
 
         if (signup != null) {

@@ -15,6 +15,6 @@ public class SignupController {
     @RequestMapping(value = URLConstants.SIGNUP, method = RequestMethod.POST)
     @CrossOrigin("*")
     public @ResponseBody Signup postNewSignup(@Validated @RequestBody Signup signup) {
-        return signup;
+        return signupService.newSignup(signup);
     }
 }

@@ -9,6 +9,6 @@ import java.util.UUID;
 
 @Repository
 public interface SignupRepository extends JpaRepository<Signup, Integer> {
-    public Signup findBySignupId(UUID signupId);
+    public Signup findBySignupId(String signupId);
     public List<Signup> findByEmail(String email);
 }
