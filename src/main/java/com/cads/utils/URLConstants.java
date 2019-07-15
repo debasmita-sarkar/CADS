@@ -22,4 +22,5 @@ public class URLConstants {
 	public static final String MultiBuildings = "/buildings/multi";
 	public static final String WORKERTYPES = "/workertypes";
 	public static final String TICKETSTATES = "/ticketstates";
+	public static final String SIGNUP = "/signup";
 }

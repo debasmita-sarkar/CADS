@@ -92,24 +92,24 @@ CREATE TABLE IF NOT EXISTS flat(
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
  
  create table if not exists ticketlog(
- 
- id int not null AUTO_INCREAMENT,
+
+ id int not null AUTO_INCREMENT,
  ticketid int not null,
  previousid int ,
  currentid int,
  previousstate varchar(20),
  currentstate varchar(20),
  comment text,
- 
+ primary key(id),
  foreign key(ticketid) references ticket(id)
  )ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
- 
- 
+
+
+
  
   
  create table if not exists signup(
-    id int not null,
+    id int not null AUTO_INCREMENT,
     firstname VARCHAR(50) NOT NULL,
     lastname VARCHAR(50),
     email VARCHAR(50) NOT NULL,
@@ -120,7 +120,8 @@ CREATE TABLE IF NOT EXISTS flat(
     buildingaddress text,
     singupid varchar(255) not null,
     signuptm datetime not null,
-    signupstate int not null
+    signupstate int not null,
+    PRIMARY KEY(id),
     UNIQUE(singupid)
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
   
