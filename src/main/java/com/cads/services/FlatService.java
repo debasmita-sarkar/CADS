@@ -35,6 +35,11 @@ public class FlatService {
 		return mapFlatIdToFlat.values().stream().collect(Collectors.toSet());
 	}
 	
+	public Flat getFlatById(int id ){
+		System.out.println("inside getflatbyid:"+id+ "flat:"+flatRepo.findById(id));
+		return flatRepo.findById(id);
+	}
+	
 	public void addFlat(Flat flat){
 		mapFlatIdToFlat.put(flat.getId(), flat);
 		//Add in db

@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +32,14 @@ public class FlatController {
 	@ResponseBody
 	public Set<Flat> getAllFlats(){
 		return flatService.getAllFlats() ;
+	}
+	
+	@RequestMapping(com.cads.utils.URLConstants.FLATS+"/{flatId}")
+	@CrossOrigin(origins = "*")
+	@ResponseBody
+	public Flat getFlatById(@PathVariable int flatId){
+		System.out.println("inside getflatbyid:"+flatId);
+		return flatService.getFlatById(flatId);
 	}
 	
 	@RequestMapping(method=org.springframework.web.bind.annotation.RequestMethod.POST,value=com.cads.utils.URLConstants.FLATS)

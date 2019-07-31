@@ -24,13 +24,22 @@ public class User {
 	private String firstName;
 	
 	@Column(name="lastname")
-	private String lastName;	
+	private String lastName;
+	
+	@Column(name="middlename")
+	private String middleName;	
 	
 	@Column
 	private String email;
 	
+	@Column(name="owner")
+	private String ownerName;
+	
 	@Column
 	private String phone;
+	
+	@Column(name="ownerphone")
+	private String ownerPhone;
 	
 	@Column(name="dateofbirth")
 	private String dateOfBirth;
@@ -42,18 +51,56 @@ public class User {
 	private int flatId;
 	
 	@Column
-	private int buildingid;	
-
-	public int getBuildingid() {
-		return buildingid;
-	}
-	public void setBuildingid(int buildingid) {
-		this.buildingid = buildingid;
-	}
-
+	private int buildingid;
+	
+	@Transient
+	private boolean isOwner;
+	
 	@Transient
 	private String flatNumber;
 	
+	@Transient
+	private String buildingName;
+	
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public void setOwnerName(String ownerName) {		
+		this.ownerName = ownerName;		
+	}
+
+	public String getOwnerPhone() {
+		return ownerPhone;
+	}
+
+	public void setOwnerPhone(String ownerPhone) {		
+		this.ownerPhone = ownerPhone;		
+	}
+
+	public boolean isOwner() {
+		return isOwner;
+	}
+
+	public void setOwner(boolean isOwner) {
+		this.isOwner = isOwner;
+	}
+
+	public String getBuildingName() {
+		return buildingName;
+	}
+
+	public void setBuildingName(String buildingName) {
+		this.buildingName = buildingName;
+	}
 	@Column
 	private String password;	
 	
@@ -161,12 +208,19 @@ public class User {
 		this.flatNumber = flatNumber;
 	}
 	
-	
+	public int getBuildingid() {
+		return buildingid;
+	}
+	public void setBuildingid(int buildingid) {
+		this.buildingid = buildingid;
+	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", phone=" + phone + ", dateOfBirth=" + dateOfBirth + ", userGroup=" + userGroup + ", flatId="
-				+ flatId + ", password=" + password + ", salt=" + salt + ", token=" + token + "]";
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", middleName=" + middleName
+				+ ", email=" + email + ", ownerName=" + ownerName + ", phone=" + phone + ", ownerPhone=" + ownerPhone
+				+ ", dateOfBirth=" + dateOfBirth + ", userGroup=" + userGroup + ", flatId=" + flatId + ", buildingid="
+				+ buildingid + ", isowner=" + isOwner + ", flatNumber=" + flatNumber + ", buildingName=" + buildingName
+				+ ", password=" + password + ", salt=" + salt + ", token=" + token + "]";
 	}
 }

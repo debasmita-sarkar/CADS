@@ -19,7 +19,7 @@ public class TicketLog {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int id=0;
 
 	@ManyToOne
 	@JoinColumn(name="ticketid")
@@ -30,11 +30,15 @@ public class TicketLog {
 
 	@Column
 	private int currentid;
+	
+	
 
 	@Enumerated(EnumType.STRING)
+	@Column(name="previousstate")
 	private TicketState previousState;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name="currentstate")
 	private TicketState currentState;
 
 	@Column

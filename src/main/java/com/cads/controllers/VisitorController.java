@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.cads.db.models.Visitor;
 import com.cads.services.VisitorService;
+import com.cads.tableHeaders.HeadersTemplate;
 
 
 @RestController
@@ -40,10 +41,24 @@ public class VisitorController {
 		visitorService.addAVisitor(visitor);	
 	}
 	
+	@RequestMapping(method=RequestMethod.POST, value=com.cads.utils.URLConstants.VISITORURI_UI)
+	@CrossOrigin(origins = "*")
+	public void addVisitorFromUI(@RequestBody Visitor visitor) {
+		visitorService.addAVisitorFromUI(visitor);	
+	}
+	
 	@RequestMapping(method=RequestMethod.DELETE, value=com.cads.utils.URLConstants.VISITORURI+"/{visitorID}")
 	@CrossOrigin(origins = "*")
 	public void deleteVisitor(@PathVariable String visitorID) {
 		System.out.println("in visitor controller visitorID"+visitorID);
 		visitorService.removeVisitor(Integer.parseInt(visitorID.trim()));
 	}
+	
+	@RequestMapping(com.cads.utils.URLConstants.VISITORCOLUMNS)
+	@CrossOrigin(origins = "*")
+	@ResponseBody
+	public List<HeadersTemplate> getAllColumns() {
+		return visitorService.getAllColumnHeaders();
+	}
+	
 }

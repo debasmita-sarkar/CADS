@@ -114,4 +114,8 @@ public class Workers {
 	public void setUserGroup(String userGroup) {
 		this.userGroup = userGroup;
 	}
+	
+	public String getNameAndPhoneCombo() {
+		return this.name+"-"+this.phone_number;
+	}
 }

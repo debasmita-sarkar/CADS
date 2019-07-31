@@ -1,6 +1,5 @@
 package com.cads.controllers;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -11,16 +10,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cads.acess.UserGroup;
 import com.cads.db.models.Ticket;
 import com.cads.db.models.Workers;
 import com.cads.services.TicketService;
+import com.cads.tableHeaders.HeadersTemplate;
 import com.cads.tickets.util.TicketState;
 import com.cads.utils.TicketType;
-import com.cads.workers.WorkerTypes;
 
 
 @RestController
@@ -49,6 +48,9 @@ public class TicketController {
 	@RequestMapping(method=RequestMethod.POST,value=com.cads.utils.URLConstants.TICKETURI)
 	@CrossOrigin(origins = "*")
 	public void postTicket(@RequestBody Ticket ticket) {
+		if(ticket.getState() == null) {
+			ticket.setState(TicketState.NEW);
+		}
 		ticketService.createTicket(ticket);		
 	}
 	
@@ -76,20 +78,27 @@ public class TicketController {
 	@CrossOrigin(origins = "*")
 	@ResponseBody
 	public String [] getAllWorkerTypes() {
-		return  Arrays.toString(WorkerTypes.values()).replaceAll("^.|.$", "").split(", ");		
+		return  ticketService.getAllWorkerTypes();		
 	}
 	
 	@RequestMapping(com.cads.utils.URLConstants.TICKETSTATES)
 	@CrossOrigin(origins = "*")
 	@ResponseBody
 	public String [] getAllTicketStates() {
-		return  Arrays.toString(TicketState.values()).replaceAll("^.|.$", "").split(", ");		
+		return  ticketService.getAllTicketStates();		
 	}
 	
 	@RequestMapping(com.cads.utils.URLConstants.TICKETTYPES)
 	@CrossOrigin(origins = "*")
 	@ResponseBody
 	public String [] getAllTicketTypes() {		
-		return  Arrays.toString(TicketType.values()).replaceAll(", House_Work", "").replaceAll("^.|.$", "").split(", ");		
+		return  ticketService.getAllTicketTypes();		
+	}
+	
+	@RequestMapping(com.cads.utils.URLConstants.TICKETCOLUMNS)
+	@CrossOrigin(origins = "*")
+	@ResponseBody
+	public List<HeadersTemplate> getAllColumns(@RequestParam(value="ticketcategory", required=true) String ticketcategory) {
+		return ticketService.getAllColumnHeaders(ticketcategory);
 	}
 }

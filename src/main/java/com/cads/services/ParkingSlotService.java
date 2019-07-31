@@ -94,5 +94,10 @@ public class ParkingSlotService {
 	public void removeMultipleParkingSlots(List<String> parkingSlotIds) {
 		parkingSlotIds.forEach(parkingSlotId -> removeFromParkingSlots(parkingSlotId));		
 	}
+	
+	public VisitorParkingSlot getParkingSlotById(int id) {
+		return parkingRepo.findById(id);
+		
+	}
 
 }

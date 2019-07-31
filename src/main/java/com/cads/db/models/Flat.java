@@ -33,6 +33,24 @@ public class Flat {
 	@Column(name="parking")
 	String parkingSlots;
 	
+	@Column(name="cankidsgoout")
+	boolean canKidsGoOut=  false;
+	
+	@Override
+	public String toString() {
+		return "Flat [id=" + id + ", number=" + number + ", buildingID=" + buildingID + ", area=" + area
+				+ ", noOfBedRooms=" + noOfBedRooms + ", floor=" + floor + ", parkingSlots=" + parkingSlots
+				+ ", canKidsGoOut=" + canKidsGoOut + "]";
+	}
+
+	public boolean isCanKidsGoOut() {
+		return canKidsGoOut;
+	}
+
+	public void setCanKidsGoOut(boolean canKidsGoOut) {
+		this.canKidsGoOut = canKidsGoOut;
+	}
+
 	public int getId() {
 		return id;
 	}

@@ -123,24 +123,21 @@ public class Visitor {
 		this.parking = parking;
 	}
 
-
 	public String getFlatnumber() {
 		return flatnumber;
 	}
-
 
 	public void setFlatnumber(String flatnumber) {
 		this.flatnumber = flatnumber;
 	}
 
-
 	public String getBuildingName() {
 		return buildingName;
 	}
 
-
 	public void setBuildingName(String buildingName) {
 		this.buildingName = buildingName;
 	}
+
 	
 }

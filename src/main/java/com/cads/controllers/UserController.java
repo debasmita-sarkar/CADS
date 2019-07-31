@@ -24,16 +24,17 @@ public class UserController {
 	@RequestMapping(com.cads.utils.URLConstants.AUTHENTICATE)
 	@CrossOrigin(origins = "*")
 	@ResponseBody
-	public boolean authenticate(@RequestParam String userName, @RequestParam String password) {
-		return userService.isValidUser(userName,password);
+	public User authenticate(@RequestParam String userName, @RequestParam String password) {
+		return userService.authenticate(userName,password);
 	}
 
 	@RequestMapping(com.cads.utils.URLConstants.USERURI)	
 	@CrossOrigin(origins = "*")
 	@ResponseBody
 	public List<User> getAllUsers() {
+		List<User> userList= userService.getAllUsers();
+		System.out.println("userList before sending:"+userList);
 		return userService.getAllUsers();
-
 	}
 
 	@RequestMapping(com.cads.utils.URLConstants.USERURI+"/{userID}")
